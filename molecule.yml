@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+docker:
+  containers:
+    - name: kibana
+      image: centos
+      image_version: 7
+      ansible_groups:
+        - kibana
+      privileged: True
+      cap_add:
+        - SYS_ADMIN
+      volume:
+        - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      command: "/usr/sbin/init"
+verifier:
+  name: testinfra
+  options:
+    v: ""
