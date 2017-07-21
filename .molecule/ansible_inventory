@@ -1,5 +1,0 @@
-[all]
-kibana ansible_connection=docker
-
-[kibana]
-kibana
