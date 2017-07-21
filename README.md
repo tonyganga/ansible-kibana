@@ -28,7 +28,7 @@ kibana_elasticsearch_url: "http://your_elasticsearch.io"
 
 Dependencies
 ------------
-w
+
 None
 
 Example Playbook
