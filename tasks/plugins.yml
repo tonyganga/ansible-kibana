@@ -14,6 +14,8 @@
 
 - name: Install Kibana plugins
   command: /usr/share/kibana/bin/kibana-plugin install {{ item.url }}
+  args:
+    creates: /usr/share/kibana/plugins/{{ item.name }}
   with_items:
     - "{{ kibana_plugins }}"
   notify: restart kibana

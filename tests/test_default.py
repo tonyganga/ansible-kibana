@@ -32,3 +32,9 @@ def test_kibana_package_version_is_550(Package):
     package = Package("kibana")
     assert package.is_installed
     assert '5.5.0' == package.version
+
+
+def test_kibana_plugins_directory_exists(File):
+    plugins = File('/usr/share/kibana/plugins/logtrail')
+    assert plugins.exists
+    assert plugins.is_directory
