@@ -2,3 +2,5 @@
 - include: setup.yml
 - include: install.yml
 - include: configure.yml
+- include: plugins.yml
+  when: install_kibana_plugins
