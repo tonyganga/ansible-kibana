@@ -1,0 +1,21 @@
+---
+# This shit doesn't work.
+# - name: Install Kibana plugins.
+#   kibana_plugin:
+#     state: present
+#     name: "{{ item.name }}"
+#     url: "{{ item.url | default(omit) }}"
+#     version: "{{ item.version | default(omit) }}"
+#     plugin_bin: "/usr/share/kibana/bin/kibana-plugin"
+#     plugin_dir: "/usr/share/kibana/plugins"
+#   with_items:
+#     - "{{ kibana_plugins }}"
+#   notify: restart kibana
+
+- name: Install Kibana plugins
+  command: /usr/share/kibana/bin/kibana-plugin install {{ item.url }}
+  args:
+    creates: /usr/share/kibana/plugins/{{ item.name }}
+  with_items:
+    - "{{ kibana_plugins }}"
+  notify: restart kibana
