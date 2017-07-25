@@ -1,10 +1,4 @@
 ---
 - hosts: all
   roles:
-    - role: ansible-kibana
-  tasks:
-  # https://github.com/metacloud/molecule/issues/859
-    - name: Install net-tools for Testinfra's Socket module
-      package:
-        name: net-tools
-        state: present
+    - role: kibana

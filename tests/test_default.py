@@ -1,5 +1,5 @@
 import testinfra.utils.ansible_runner
-
+import pytest
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     '.molecule/ansible_inventory').get_hosts('all')
@@ -23,18 +23,28 @@ def test_kibana_service_is_running_and_enabled(Service):
     assert service.is_enabled
 
 
-def test_kibana_listen_on_port_5601(Socket):
-    port = Socket("tcp://0.0.0.0:5601")
+@pytest.mark.parametrize("port", [
+    ("5601")
+])
+def test_kibana_listen_on_port_5601(Socket, port):
+    port = Socket("tcp://0.0.0.0:" + port)
     assert port.is_listening
 
 
-def test_kibana_package_version_is_550(Package):
+@pytest.mark.parametrize("version", [
+    ("5.5.0")
+])
+def test_kibana_package_version_is_550(Package, version):
     package = Package("kibana")
     assert package.is_installed
-    assert '5.5.0' == package.version
+    assert version == package.version
 
 
-def test_kibana_plugins_directory_exists(File):
-    plugins = File('/usr/share/kibana/plugins/logtrail')
-    assert plugins.exists
-    assert plugins.is_directory
+@pytest.mark.parametrize("plugin", [
+    ("logtrail")
+])
+def test_kibana_plugins_installed(File, Command, plugin):
+    if "centos-7-kibana-plugins" in Command("hostname").stdout:
+        directory = File("/usr/share/kibana/plugins/" + plugin)
+        assert directory.exists
+        assert directory.is_directory

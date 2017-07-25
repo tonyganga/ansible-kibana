@@ -5,9 +5,11 @@ driver:
   name: docker
 ansible:
   verbose: true
+  playbook: ./tests/test.yml
 docker:
   containers:
-    - name: kibana
+    - name: centos-7-kibana
+      hostname: centos-7-kibana
       image: centos
       image_version: 7
       ansible_groups:
@@ -20,7 +22,19 @@ docker:
       command: "/usr/sbin/init"
       port_bindings:
         5601: 5601
+    - name: centos-7-kibana-plugins
+      hostname: centos-7-kibana-plugins
+      image: centos
+      image_version: 7
+      ansible_groups:
+        - kibana-plugins
+      privileged: True
+      cap_add:
+        - SYS_ADMIN
+      volume:
+        - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+      command: "/usr/sbin/init"
 verifier:
   name: testinfra
-  options:
-    v: ""
+  # options:
+    # v: ""
