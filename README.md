@@ -26,8 +26,6 @@ kibana_server_host: "0.0.0.0"
 kibana_elasticsearch_url: "http://your_elasticsearch.io"
 install_kibana_plugins: true
 kibana_plugins: []
-#- url: https://github.com/sivasamyk/logtrail/releases/download/v0.1.17/logtrail-5.5.0-0.1.17.zip
-#  name: logtrail
 
 ```
 
@@ -47,6 +45,9 @@ Example Playbook
         kibana_server_port: 5601
         kibana_server_host: "0.0.0.0"
         kibana_elasticsearch_url: "elasticsearch.awesomedomain.com"
+        kibana_plugins:
+        - url: https://github.com/sivasamyk/logtrail/releases/download/v0.1.17/logtrail-5.5.0-0.1.17.zip
+          name: logtrail
 
 
 Tests
