@@ -36,5 +36,5 @@ docker:
       command: "/usr/sbin/init"
 verifier:
   name: testinfra
-  # options:
-    # v: ""
+  options:
+    v: ""
