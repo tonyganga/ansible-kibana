@@ -1,5 +1,13 @@
 ---
-- name: restart kibana
+- name: restart kibana service
   service:
     name: kibana
     state: restarted
+  listen: restart kibana
+
+- name: start kibana service
+  systemd:
+    name: kibana
+    state: started
+    enabled: yes
+  listen: start kibana
