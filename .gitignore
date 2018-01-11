@@ -2,3 +2,4 @@
 .cache
 .molecule/*
 tests/__pycache__
+ansible-kibana
